@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/phpinfo', function () {
@@ -36,3 +37,9 @@ Route::group(['prefix' => 'user'], function() {
     Route::put('/{id}/update',[UserController::class, 'update'])->name('user.update');
     Route::delete('/{id}', [UserController::class, 'delete'])->name('user.delete');
 });
+
+Route::get('/register', [AuthController::class, 'showRegistrationForm']);
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+ 
+Route::get('/login', [AuthController::class, 'showLoginForm']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
